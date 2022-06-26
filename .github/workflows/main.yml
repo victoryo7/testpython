@@ -27,7 +27,7 @@ jobs:
         run: |
           pip install Authlib requests pandas numpy 
           
-          
+          #!/usr/bin/python3
           from authlib.jose import jwt
           import time
           import json

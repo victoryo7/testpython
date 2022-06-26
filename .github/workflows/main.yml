@@ -17,8 +17,7 @@ on:
         required: true
       
 jobs:
-  sciptRun:
-    # The type of runner that the job will run on
+  scriptRun:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -42,7 +41,9 @@ jobs:
           import numpy as np
           import math
           from itertools import cycle
-        
+          
+      - name: Run Script
+        run: |
           echo "Store: ${{ github.event.inputs.script_path }}"
           INPUT_STORE=${{ github.event.inputs.script_path }} 
           python3 test.py

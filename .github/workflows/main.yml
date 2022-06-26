@@ -25,7 +25,7 @@ jobs:
           python-version: "3.10"
       - name: Import Package
         run: |
-          pip install Authlib requests urllib pandas numpy json
+          pip install Authlib requests pandas numpy json
           
           
           from authlib.jose import jwt

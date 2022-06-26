@@ -5,18 +5,12 @@ on:
     inputs:
       script_path:
         description: 'Script Path'
-        # Update Default Path
-        default: ''
         required: true
       argument1:
         description: 'Argument 1'
-         # Update Default Argument1
-        default: ''
         required: true
       argument2:
         description: 'Argument 2'
-        # Update Default Argument2
-        default: ''
         required: true
       
 jobs:
@@ -31,7 +25,7 @@ jobs:
           python-version: "3.10"
       - name: Import Package
         run: |
-          pip install authlib request urllib pandas numpy json
+          pip install Authlib requests urllib pandas numpy json
           
           
           from authlib.jose import jwt

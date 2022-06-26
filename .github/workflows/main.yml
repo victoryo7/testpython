@@ -29,6 +29,10 @@ jobs:
       - name: Import Package
         run: |
           pip install jwt
+          pip install pandas
+          pip install numpy
+          
+          #!/usr/bin/env python
           
           from authlib.jose import jwt
           import time

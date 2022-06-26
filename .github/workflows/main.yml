@@ -28,6 +28,8 @@ jobs:
           python-version: "3.10"
       - name: Import Package
         run: |
+          #!/usr/bin/env python
+          
           from authlib.jose import jwt
           import time
           import json

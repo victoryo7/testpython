@@ -43,9 +43,8 @@ jobs:
           fileForms: '{"file":"data/file.csv"}'
       - name: Result
         run: |
-          $output = '${{ steps.upload.outputs.output }}' | ConvertFrom-Json
-          Write-Host "Time from output $($output.time) statusCode $($output.statusCode) data $($output.data)"
- 
+          $output = '${{ steps.upload.outputs.output }}' 
+         
     
         
           

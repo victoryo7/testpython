@@ -14,7 +14,7 @@ on:
         required: true
       
 jobs:
-  scriptRun:
+  Python:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,7 +28,7 @@ jobs:
           pip install Authlib requests pandas numpy 
           
           #!/usr/bin/python3
-          from authlib.jose import jwt
+       
           import time
           import json
           import urllib

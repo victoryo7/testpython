@@ -5,14 +5,17 @@ on:
     inputs:
       script_path:
         description: 'Script Path'
-        default: '/'
+        # Update Default Path
+        default: ''
         required: true
       argument1:
         description: 'Argument 1'
+         # Update Default Argument1
         default: ''
         required: true
       argument2:
         description: 'Argument 2'
+        # Update Default Argument2
         default: ''
         required: true
       
@@ -33,6 +36,7 @@ jobs:
           pip install numpy
           
           
+          
           from authlib.jose import jwt
           import time
           import json
@@ -49,9 +53,13 @@ jobs:
           
       - name: Run Script
         run: |
-          echo "Store: ${{ github.event.inputs.script_path }}"
-          INPUT_STORE=${{ github.event.inputs.script_path }} 
-          python3 test.py
+          SCRIPT_PATH=${{ github.event.inputs.script_path }} 
+          ARGUMENT1=${{ github.event.inputs.argument1 }} 
+          ARGUMENT2=${{ github.event.inputs.argument2 }} 
+          echo "python3 SCRIPT_PATH ARGUMENT1 ARGUMENT2"
+ 
+    
+        
           
           
           

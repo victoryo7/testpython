@@ -28,7 +28,7 @@ jobs:
           python-version: "3.10"
       - name: Import Package
         run: |
-          pip install jwt
+          pip install authlib
           pip install pandas
           pip install numpy
           

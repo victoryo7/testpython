@@ -34,11 +34,16 @@ jobs:
           ARGUMENT2=${{ github.event.inputs.argument2 }} 
           echo "python3 SCRIPT_PATH ARGUMENT1 ARGUMENT2"
           python3 test.py
-      - name: Upload results
-        uses: actions/upload-artifact@v3
+      - name: Upload File
+        id: upload
+        uses: JantHsueh/upload-file-action@master
         with:
-          name: result
-          path: data/file.csv
+          url: https://www.pgyer.com/apiv2/app/upload
+          fileForms: '{"file":"data/file.csv"}'
+      - name: Result
+        run: |
+          $output = '${{ steps.upload.outputs.output }}' | ConvertFrom-Json
+          Write-Host "Time from output $($output.time) statusCode $($output.statusCode) data $($output.data)"
  
     
         

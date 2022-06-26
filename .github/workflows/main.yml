@@ -27,27 +27,17 @@ jobs:
         run: |
           pip install Authlib requests pandas numpy 
           
-          #!/usr/bin/python3
-       
-          import time
-          import json
-          import urllib
-          from urllib.request import urlopen
-          import requests
-          import urllib
-          import http.client
-          import sys
-          import pandas as pd
-          import numpy as np
-          import math
-          from itertools import cycle
-          
       - name: Run Script
         run: |
           SCRIPT_PATH=${{ github.event.inputs.script_path }} 
           ARGUMENT1=${{ github.event.inputs.argument1 }} 
           ARGUMENT2=${{ github.event.inputs.argument2 }} 
           echo "python3 SCRIPT_PATH ARGUMENT1 ARGUMENT2"
+      - name: Upload pytest test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: result
+          path: data/file.csv
  
     
         

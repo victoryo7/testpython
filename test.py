@@ -1,4 +1,4 @@
 import os
-inputvariable = os.environ['SCRIPT_PATH']
+inputvariable = os.environ['script_path']
 print(inputvariable)
 print('Hello World!')

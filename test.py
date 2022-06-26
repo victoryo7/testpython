@@ -11,6 +11,7 @@ import pandas as pd
 import numpy as np
 import math
 from itertools import cycle
+import os
 
 inputvariable = os.environ['script_path']
 print(inputvariable)

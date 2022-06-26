@@ -28,7 +28,7 @@ jobs:
           python-version: "3.10"
       - name: Import Package
         run: |
-          #!/usr/bin/env python
+          pip install jwt
           
           from authlib.jose import jwt
           import time

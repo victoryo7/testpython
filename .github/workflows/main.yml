@@ -32,8 +32,7 @@ jobs:
           SCRIPT_PATH=${{ github.event.inputs.script_path }} 
           ARGUMENT1=${{ github.event.inputs.argument1 }} 
           ARGUMENT2=${{ github.event.inputs.argument2 }} 
-          echo $SCRIPT_PATH
-          python3 test.py
+          python3 $SCRIPT_PATH
           
       - name: Upload results
         uses: actions/upload-artifact@v3

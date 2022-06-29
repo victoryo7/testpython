@@ -4,23 +4,17 @@ on:
     # Inputs the workflow accepts.
     inputs:
       script_path:
-        description: 'Script Path'
-        # Update Default Path
-        default: ''
+        description: "Script Path"
         required: true
       argument1:
-        description: 'Argument 1'
-         # Update Default Argument1
-        default: ''
+        description: "Argument 1"
         required: true
       argument2:
-        description: 'Argument 2'
-        # Update Default Argument2
-        default: ''
+        description: "Argument 2"
         required: true
-      
+
 jobs:
-  scriptRun:
+  Python:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,52 +23,19 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      - name: Install dependencies
+      - name: Import Package
         run: |
-          pip install authlib
-          pip install pandas
-          pip install numpy
-          
-          
-          
-          from authlib.jose import jwt
-          import time
-          import json
-          import urllib
-          from urllib.request import urlopen
-          import requests
-          import urllib
-          import http.client
-          import sys
-          import pandas as pd
-          import numpy as np
-          import math
-          from itertools import cycle
-          
+          pip install Authlib requests pandas numpy
+
       - name: Run Script
         run: |
           SCRIPT_PATH=${{ github.event.inputs.script_path }} 
           ARGUMENT1=${{ github.event.inputs.argument1 }} 
           ARGUMENT2=${{ github.event.inputs.argument2 }} 
-          echo "python3 SCRIPT_PATH ARGUMENT1 ARGUMENT2"
-          echo SCRIPT_PATH
-          echo ARGUMENT1
-          echo ARGUMENT2
+          python3 test.py
           
-      - name: Upload File
-        id: upload
-        uses: JantHsueh/upload-file-action@master
+      - name: Upload results
+        uses: actions/upload-artifact@v3
         with:
-          url: https://www.pgyer.com/apiv2/app/upload
-          fileForms: '{"file":"data"}'
-      - name: Result
-        run: |
-          $output = '${{ steps.upload.outputs.output }}' | ConvertFrom-Json
-          Write-Host "Time from output $($output.time) statusCode $($output.statusCode) data $($output.data)"
-        
-        
-          
-          
-          
-          
-          
+          name: result
+          path: data/file.csv

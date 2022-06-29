@@ -34,7 +34,7 @@ jobs:
           ARGUMENT1=${{ github.event.inputs.argument1 }} 
           ARGUMENT2=${{ github.event.inputs.argument2 }} 
           echo "python3 SCRIPT_PATH ARGUMENT1 ARGUMENT2"
-          python3 SCRIPT_PATH
+          python3 github.event.inputs.script_path
       - name: Upload File
         id: upload
         uses: JantHsueh/upload-file-action@master

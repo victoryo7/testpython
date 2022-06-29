@@ -5,16 +5,22 @@ on:
     inputs:
       script_path:
         description: 'Script Path'
+        # Update Default Path
+        default: ''
         required: true
       argument1:
         description: 'Argument 1'
+         # Update Default Argument1
+        default: ''
         required: true
       argument2:
         description: 'Argument 2'
+        # Update Default Argument2
+        default: ''
         required: true
       
 jobs:
-  Python:
+  scriptRun:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,30 +29,49 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      - name: Import Package
+      - name: Install dependencies
         run: |
-          pip install Authlib requests pandas numpy 
+          pip install authlib
+          pip install pandas
+          pip install numpy
+          
+          
+          
+          from authlib.jose import jwt
+          import time
+          import json
+          import urllib
+          from urllib.request import urlopen
+          import requests
+          import urllib
+          import http.client
+          import sys
+          import pandas as pd
+          import numpy as np
+          import math
+          from itertools import cycle
           
       - name: Run Script
         run: |
-          ls
           SCRIPT_PATH=${{ github.event.inputs.script_path }} 
           ARGUMENT1=${{ github.event.inputs.argument1 }} 
           ARGUMENT2=${{ github.event.inputs.argument2 }} 
           echo "python3 SCRIPT_PATH ARGUMENT1 ARGUMENT2"
-          python3 github.event.inputs.script_path
+          echo SCRIPT_PATH
+          echo ARGUMENT1
+          echo ARGUMENT2
+          
       - name: Upload File
         id: upload
         uses: JantHsueh/upload-file-action@master
         with:
-          url: https://prod-44.westus.logic.azure.com:443/workflows/eb1c1217278447beb6bab498b0616775/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=lIVoejGMRX6UEJsy1ai-evFshUbULEUVWpRxDa1wKIc
-          forms: '{"_api_key":"test","buildInstallType":3}'
-          fileForms: '{"file":"data/file.csv"}'
+          url: https://www.pgyer.com/apiv2/app/upload
+          fileForms: '{"file":"data"}'
       - name: Result
         run: |
-          $output = '${{ steps.upload.outputs.output }}' 
-         
-    
+          $output = '${{ steps.upload.outputs.output }}' | ConvertFrom-Json
+          Write-Host "Time from output $($output.time) statusCode $($output.statusCode) data $($output.data)"
+        
         
           
           

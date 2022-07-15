@@ -33,6 +33,7 @@ jobs:
           ARGUMENT1=${{ github.event.inputs.argument1 }} 
           ARGUMENT2=${{ github.event.inputs.argument2 }} 
           python3 $SCRIPT_PATH
+          echo ${{ github.run_number }}
           
       - name: Upload results
         uses: actions/upload-artifact@v3

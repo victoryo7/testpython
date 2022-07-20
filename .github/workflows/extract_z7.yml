@@ -13,15 +13,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+        # Get Formated Date - ${{ steps.date.outputs.date }}
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y%m%d-%H%M%S')"
+        # Get Current Branch Name - ${{ steps.extract_branch.outputs.branch }}
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
+      - uses: actions/checkout@v3
+      - name: Rename the file
+        shell: bash
+        run: |
+          mv sample.7z Escapia_Liquibase_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }}.7z
+          ls
+ 
+          
 
-      - name: Test with environment variables
-       # run: echo  ${{ steps.date.outputs.date }}
-        run: echo ${{ steps.extract_branch.outputs.branch }}
        

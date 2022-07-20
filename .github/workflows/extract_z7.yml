@@ -1,0 +1,24 @@
+
+
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+    
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: extract-7z-action
+        uses: DuckSoft/extract-7z-action@v1.0
+        with:
+          pathSource: sample.7z
+          pathTarget: zipFileDat/
+          
+
+      

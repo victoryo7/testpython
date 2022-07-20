@@ -17,4 +17,6 @@ jobs:
         id: date
         run: echo "::set-output name=date::$(date +'%Y%m%d-%H%M%S')"
       - name: Test with environment variables
-        run: echo ${{ steps.date.outputs.date }}
+       # run: echo  ${{ steps.date.outputs.date }}
+        run: echo ${{ steps.extract_branch.outputs.branch }}
+       

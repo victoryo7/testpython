@@ -18,7 +18,12 @@ jobs:
         uses: DuckSoft/extract-7z-action@v1.0
         with:
           pathSource: sample.7z
-          pathTarget: zipFileDat/
+          pathTarget: zipFileData/
+      - name: Upload results
+        uses: actions/upload-artifact@v3
+        with:
+          name: result
+          path: zipFileData/
           
 
       

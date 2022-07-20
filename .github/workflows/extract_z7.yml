@@ -13,28 +13,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: extract-7z-action
-        uses: DuckSoft/extract-7z-action@v1.0
-        with:
-          pathSource: sample.7z
-          pathTarget: zipFileData/
-      - name: Upload results
-        uses: actions/upload-artifact@v3
-        with:
-          name: artifact
-          path: zipFileData/
-      - uses: actions/download-artifact@v3
-        with:
-          name: artifact
-
-      - name: Push OctoPetShop packages
-        uses: OctopusDeploy/push-package-action@v1.1.1
-        with:
-          api_key: ${{ secrets.OCTOPUSSERVERAPIKEY }}
-          server: ${{ secrets.OCTOPUSSERVERURL }}
-          packages: "artifact.zip"
-          space: ${{ secrets.OCTOPUSSERVER_SPACE }}
-          
-
-      
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y%m%d-%h%s')"
+      - name: Test with environment variables
+        run: echo ${{ steps.date.outputs.date }}

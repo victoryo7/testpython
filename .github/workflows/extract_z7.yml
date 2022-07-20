@@ -1,6 +1,6 @@
 
 
-name: CI
+name: JFROG artifactory and Octopus Deploy
 
 on:
   push:
@@ -25,15 +25,39 @@ jobs:
         # Checkout in Branch
       - uses: actions/checkout@v3
         # Rename the file in custom folder
+        # Please replace sample.7z with your file name
       - name: Rename the file
         shell: bash
         run: |
           mv sample.7z Escapia_Liquibase_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }}.7z
+        # Upload artifactory to JFROG using CURL
       - name: Upload to JFROG 
         shell: bash
         run: |
           curl -H "X-JFrog-Art-Api:${{ secrets.JFROG_API_KEY }}" -T Escapia_Liquibase_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }}.7z "${{ secrets.JFROG_ARTIFACTROY_LINK_WITH_PATH}}"
-      
+          
+        # Install Octopus CLI 
+      - name: Install Octopus CLI 🐙
+        uses: OctopusDeploy/install-octopus-cli-action@v1
+        with:
+          version: latest
+        # Create a release and deploy
+      - name: Create a release in Octopus Deploy 🐙
+        uses: OctopusDeploy/create-release-action@v2
+        env:
+          OCTOPUS_API_KEY: ${{ secrets.OCTOPUSSERVERAPIKEY }}
+          OCTOPUS_HOST: ${{ secrets.OCTOPUSSERVERURL }}
+          OCTOPUS_SPACE: ${{ secrets.OCTOPUSSERVER_SPACE }}
+        with:
+          project: 'Escapia.Liquibase'
+          package_version: ${{ steps.date.outputs.date }}
+          package: |
+            Escapia_Liquibase_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }}.7z
+          deploy_to: Test
+            
+          
+
+          
         
  
           

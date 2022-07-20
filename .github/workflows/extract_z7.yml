@@ -22,8 +22,19 @@ jobs:
       - name: Upload results
         uses: actions/upload-artifact@v3
         with:
-          name: result
+          name: artifact
           path: zipFileData/
+      - uses: actions/download-artifact@v3
+        with:
+          name: artifact
+
+      - name: Push OctoPetShop packages
+        uses: OctopusDeploy/push-package-action@v1.1.1
+        with:
+          api_key: ${{ secrets.OCTOPUSSERVERAPIKEY }}
+          server: ${{ secrets.OCTOPUSSERVERURL }}
+          packages: "artifact.zip"
+          space: ${{ secrets.OCTOPUSSERVER_SPACE }}
           
 
       

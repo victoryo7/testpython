@@ -22,12 +22,19 @@ jobs:
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
+        # Checkout in Branch
       - uses: actions/checkout@v3
+        # Rename the file in custom folder
       - name: Rename the file
         shell: bash
         run: |
           mv sample.7z Escapia_Liquibase_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }}.7z
-          ls
+      - name: Upload to JFROG 
+        shell: bash
+        run: |
+          curl -H "X-JFrog-Art-Api:${{ secrets.JFROG_API_KEY }}" -T Escapia_Liquibase_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }}.7z "${{ secrets.JFROG_ARTIFACTROY_LINK_WITH_PATH}}"
+      
+        
  
           
 

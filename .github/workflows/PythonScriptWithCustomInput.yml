@@ -1,4 +1,4 @@
-name: Python Script
+name: Python Script with Custom Input
 on:
   workflow_dispatch:
     # Inputs the workflow accepts.

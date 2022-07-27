@@ -24,18 +24,16 @@ jobs:
         id: extract_branch
         # Checkout in Branch
       - uses: actions/checkout@v3
-      - name: create-7z-action
-        uses: DuckSoft/create-7z-action@v1.0
-        with: 
-          pathSource: Data/
-          pathTarget: /
+      - uses: edgarrc/action-7z@v1
+        with:
+          args: 7z a -t7z -mx=9 Data.7z ./Data/
 
         # Rename the file in custom folder
         # Please replace sample.7z with your file name
       - name: Rename the file
         shell: bash
         run: |
-          mv sample.7z Escapia_Liquibase_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }}.7z
+          mv Data.7z Escapia_Liquibase_${{ steps.extract_branch.outputs.branch }}_${{ steps.date.outputs.date }}.7z
         # Upload artifactory to JFROG using CURL
       - name: Upload to JFROG 
         shell: bash

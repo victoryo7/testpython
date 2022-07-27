@@ -27,8 +27,8 @@ jobs:
       - name: create-7z-action
         uses: DuckSoft/create-7z-action@v1.0
         with: 
-          pathSource: Data
-          pathTarget: DataZip
+          pathSource: Data/
+          pathTarget: /
 
         # Rename the file in custom folder
         # Please replace sample.7z with your file name

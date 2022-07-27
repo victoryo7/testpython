@@ -1,4 +1,4 @@
-name: Upload Website
+name: Repo Sync with S3 Bucket
 
 on:
   push:

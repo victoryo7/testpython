@@ -24,9 +24,12 @@ jobs:
         id: extract_branch
         # Checkout in Branch
       - uses: actions/checkout@v3
+      - name: echo
+        shell: bash
+        run: ls
       - uses: edgarrc/action-7z@v1
         with:
-          args: 7z a -t7z -mx=9 Data.7z Data/
+          args: 7z a -t7z -mx=9 Data.7z /Data/
 
         # Rename the file in custom folder
         # Please replace sample.7z with your file name
